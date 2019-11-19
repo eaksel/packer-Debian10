@@ -1,7 +1,9 @@
 #!/bin/bash -eux
 
-apt -y autoremove
-apt -y update
+pip3 uninstall -y ansible
+
+apt -y autoremove --purge
+apt-get clean
 
 # Zero out the rest of the free space using dd, then delete the written file.
 dd if=/dev/zero of=/EMPTY bs=1M
