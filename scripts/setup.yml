@@ -55,9 +55,8 @@
 
   - name: Upgrade all packages
     apt:
-      name: "*"
-      state: latest
-    when: ansible_os_family == "Debian"
+      update_cache: yes
+      upgrade: dist
 
   - name: Install packages
     apt:
@@ -69,12 +68,12 @@
       - ccze
       - curl
       - git
+      - net-tools
       - rsync
       - screen
       - tcpdump
       - vim
       - wget
-    when: ansible_os_family == "Debian"
 
   - name: Install dependencies for VirtualBox Guest Additions
     apt:
@@ -83,8 +82,9 @@
     vars:
       packages:
       - dkms
+      - make
+      - "linux-headers-{{ ansible_kernel }}"
     when:
-      - ansible_os_family == "Debian"
       - ansible_virtualization_type == "virtualbox"
 
   - name: Mount VBoxGuestAdditions.iso
@@ -98,12 +98,14 @@
 
   - name: Install VBoxGuestAdditions.iso
     command: sh /mnt/VBoxLinuxAdditions.run
+    register: vbox_result
+    failed_when: "'Running kernel modules will not be replaced until \nthe system is restarted' not in vbox_result.stdout"
     when: ansible_virtualization_type == "virtualbox"
 
   - name: Umount VBoxGuestAdditions.iso
     mount:
       path: /mnt
-      state: unmounted
+      state: absent
     when: ansible_virtualization_type == "virtualbox"
 
   - name: Delete VBoxGuestAdditions.iso
@@ -117,5 +119,4 @@
       name: open-vm-tools
       state: latest
     when:
-      - ansible_os_family == "Debian"
       - ansible_virtualization_type == "VMware"
