@@ -1,6 +1,6 @@
 {
   "variables": {
-      "vm_name": "debian-10.9.0-amd64",
+      "vm_name": "debian-10.10.0-amd64",
       "numvcpus": "1",
       "memsize": "1024",
       "disk_size": "40960",
