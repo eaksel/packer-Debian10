@@ -52,7 +52,12 @@
         "vm_name": "{{ user `vm_name` }}",
         "vboxmanage": [
           ["modifyvm", "{{.Name}}", "--memory", "{{ user `memsize` }}"],
-          ["modifyvm", "{{.Name}}", "--cpus", "{{ user `numvcpus` }}"]
+          ["modifyvm", "{{.Name}}", "--cpus", "{{ user `numvcpus` }}"],
+          ["modifyvm", "{{.Name}}", "--vram", "20"],
+          ["modifyvm", "{{.Name}}", "--graphicscontroller", "vmsvga"],
+          ["modifyvm", "{{.Name}}", "--acpi", "on"],
+          ["modifyvm", "{{.Name}}", "--ioapic", "on"],
+          ["modifyvm", "{{.Name}}", "--rtcuseutc", "on"]
         ]
       }
   ],
