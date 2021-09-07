@@ -120,3 +120,11 @@
       state: latest
     when:
       - ansible_virtualization_type == "VMware"
+
+  - name: Configure automatic UEFI Boot for VirtualBox 1
+    command: mkdir /boot/efi/EFI/boot
+    when: ansible_virtualization_type == "virtualbox"
+
+  - name: Configure automatic UEFI Boot for VirtualBox 2
+    command: cp /boot/efi/EFI/debian/grubx64.efi /boot/efi/EFI/boot/bootx64.efi
+    when: ansible_virtualization_type == "virtualbox"
