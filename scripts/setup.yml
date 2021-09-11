@@ -43,12 +43,15 @@
       line: "PermitRootLogin yes"
       state: present
 
-  - name: Disable quiet boot mode
+  - name: Disable quiet boot mode and set timeout
     lineinfile:
       path: /etc/default/grub
-      regexp: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet"'
-      line: 'GRUB_CMDLINE_LINUX_DEFAULT=""'
+      regexp: "{{ item.regexp }}"
+      line: "{{ item.line }}"
       state: present
+    with_items:
+      - {regexp: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet"', line: 'GRUB_CMDLINE_LINUX_DEFAULT=""'}
+      - {regexp: 'GRUB_TIMEOUT="5"', line: 'GRUB_TIMEOUT="1"'}
 
   - name: Update grub2
     command: update-grub2
