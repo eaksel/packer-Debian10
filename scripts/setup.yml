@@ -121,10 +121,10 @@
     when:
       - ansible_virtualization_type == "VMware"
 
-  - name: Configure automatic UEFI Boot for VirtualBox 1
-    command: mkdir /boot/efi/EFI/boot
-    when: ansible_virtualization_type == "virtualbox"
+  - name: Check to see if we are booting with EFI or UEFI
+    set_fact:
+      booted_with_efi: "{{ ansible_facts['mounts'] | selectattr('mount', 'equalto', '/boot/efi') | list | length > 0 }}"
 
-  - name: Configure automatic UEFI Boot for VirtualBox 2
-    command: cp /boot/efi/EFI/debian/grubx64.efi /boot/efi/EFI/boot/bootx64.efi
-    when: ansible_virtualization_type == "virtualbox"
+  - name: Configure automatic UEFI Boot for VirtualBox
+    shell: "test -d /boot/efi/EFI/boot || mkdir -p /boot/efi/EFI/boot && cp /boot/efi/EFI/debian/grubx64.efi /boot/efi/EFI/boot/bootx64.efi"
+    when: ansible_virtualization_type == "virtualbox" and booted_with_efi
