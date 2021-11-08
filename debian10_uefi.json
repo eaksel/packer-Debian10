@@ -1,11 +1,11 @@
 {
   "variables": {
-      "vm_name": "debian-10.10.0-amd64",
+      "vm_name": "debian-10.11.0-amd64",
       "numvcpus": "1",
       "memsize": "1024",
       "disk_size": "40960",
-      "iso_url": "https://cdimage.debian.org/mirror/cdimage/archive/10.10.0/amd64/iso-cd/debian-10.10.0-amd64-netinst.iso",
-      "iso_checksum": "c433254a7c5b5b9e6a05f9e1379a0bd6ab3323f89b56537b684b6d1bd1f8b6ad",
+      "iso_url": "https://cdimage.debian.org/mirror/cdimage/archive/10.11.0/amd64/iso-cd/debian-10.11.0-amd64-netinst.iso",
+      "iso_checksum": "133430141272d8bf96cfb10b6bfd1c945f5a59ea0efc2bcb56d1033c7f2866ea",
       "ssh_username" : "packer",
       "ssh_password" : "packer",
       "boot_wait": "5s"

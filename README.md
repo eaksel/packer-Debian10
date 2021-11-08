@@ -33,14 +33,14 @@ packer build -only=virtualbox-iso debian10.json
 
 *If you omit the keyword "-only=" both the Workstation and Virtualbox VMs will be created.*
 
-By default the .iso of Debian 10 is pulled from <https://cdimage.debian.org/mirror/cdimage/archive/10.10.0/amd64/iso-cd/debian-10.10.0-amd64-netinst.iso>
+By default the .iso of Debian 10 is pulled from <https://cdimage.debian.org/mirror/cdimage/archive/10.11.0/amd64/iso-cd/debian-10.11.0-amd64-netinst.iso>
 
 You can change the URL to one closer to your build server. To do so change the **"iso_url"** parameter in the **"variables"** section of the debian10.json file.
 
 ```json
 {
   "variables": {
-      "iso_url": "https://cdimage.debian.org/mirror/cdimage/archive/10.10.0/amd64/iso-cd/debian-10.10.0-amd64-netinst.iso"
+      "iso_url": "https://cdimage.debian.org/mirror/cdimage/archive/10.11.0/amd64/iso-cd/debian-10.11.0-amd64-netinst.iso"
   }
 }
 ```
