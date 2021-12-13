@@ -59,6 +59,25 @@
           ["modifyvm", "{{.Name}}", "--ioapic", "on"],
           ["modifyvm", "{{.Name}}", "--rtcuseutc", "on"]
         ]
+      },
+      {
+        "type": "hyperv-iso",
+        "boot_command": ["<esc><wait>auto preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg<enter>"],
+        "boot_wait": "{{ user `boot_wait` }}",
+        "disk_size": "{{ user `disk_size` }}",
+        "headless": false,
+        "http_directory": "http",
+        "iso_checksum": "{{ user `iso_checksum` }}",
+        "iso_url": "{{ user `iso_url` }}",
+        "shutdown_command": "echo 'packer'|sudo -S shutdown -P now",
+        "ssh_password": "{{ user `ssh_password` }}",
+        "ssh_port": 22,
+        "ssh_username": "{{ user `ssh_username` }}",
+        "ssh_timeout": "30m",
+        "vm_name": "{{ user `vm_name` }}",
+        "generation": "1",
+        "switch_name": "Default Switch",
+        "skip_export": true
       }
   ],
   "provisioners": [
